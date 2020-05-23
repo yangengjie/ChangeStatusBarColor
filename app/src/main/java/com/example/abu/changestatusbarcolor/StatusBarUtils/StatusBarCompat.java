@@ -24,7 +24,7 @@ public class StatusBarCompat {
 
         ViewGroup viewGroup = activity.findViewById(android.R.id.content);
         View child = viewGroup.getChildAt(0);
-        if(child!=null)
+        if (child != null)
             child.setFitsSystemWindows(true); //设置fitSystemWindows=true表示调整当前设置这个属性的View的padding去为我们的status_bar流出空间
         View view = new View(activity);
         view.setBackgroundColor(activity.getResources().getColor(statusBarColor));
@@ -38,5 +38,11 @@ public class StatusBarCompat {
         if (resouceId > 0)
             statusBarHeight = context.getResources().getDimensionPixelOffset(resouceId);
         return statusBarHeight;
+    }
+
+    public static void setTranslucentForImageView(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
     }
 }
